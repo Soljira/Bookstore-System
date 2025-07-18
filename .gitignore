@@ -1,0 +1,9 @@
+.env
+mysql_data/
+*.log
+.DS_Store
+Thumbs.db
+vendor/
+node_modules/
+.vscode/
+

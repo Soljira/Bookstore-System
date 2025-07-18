@@ -1,0 +1,64 @@
+version: '3.8'
+services:
+  php:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/html
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=bookstoreDB
+    networks:
+      - bookstoreNetwork
+
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: bookstoreDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - bookstoreNetwork
+
+
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    environment:
+      # ADMINER_DEFAULT_SERVER: mysql-adminer-container
+      ADMINER_DESIGN: dracula  # Custom theme
+    depends_on:
+      - mysql
+    networks:
+      - bookstoreNetwork
+    ports:
+      - "8081:8080"     # access Adminer at http://localhost:8081
+
+volumes:
+  mysql_data:
+
+networks:
+  bookstoreNetwork:
+    driver: bridge
+
+
+
+
+
+
+
+
+
