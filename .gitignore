@@ -1,9 +1,25 @@
+# Environment variables (NEVER commit these)
 .env
+.env.local
+.env.production
+
+# Docker volumes and data
 mysql_data/
+docker-volumes/
+
+# Backup files
+*.bak
+*.backup
+*.sql.bak
+
+# Sensitive config files 
+config.local.php
+secrets.php
+private.key
+
 *.log
 .DS_Store
 Thumbs.db
 vendor/
 node_modules/
 .vscode/
-

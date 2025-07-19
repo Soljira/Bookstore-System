@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   php:
     build: .
@@ -16,9 +15,9 @@ services:
     networks:
       - bookstoreNetwork
 
-
   mysql:
     image: mysql:8.0
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: bookstoreDB
@@ -32,13 +31,10 @@ services:
     networks:
       - bookstoreNetwork
 
-
-
   adminer:
     image: adminer:latest
     restart: always
     environment:
-      # ADMINER_DEFAULT_SERVER: mysql-adminer-container
       ADMINER_DESIGN: dracula  # Custom theme
     depends_on:
       - mysql
@@ -53,12 +49,3 @@ volumes:
 networks:
   bookstoreNetwork:
     driver: bridge
-
-
-
-
-
-
-
-
-
