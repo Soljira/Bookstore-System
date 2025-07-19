@@ -1,8 +1,18 @@
 <?php
+/**
+ * This should work regardless if you run this with host php or via docker
+ * To run with php in host, type in terminal:
+ *  php public/api/config.php
+ * To run with docker, type in terminal:
+ *  docker exec -it bookstore-php-1 php /var/www/html/api/config.php
+ */
+
+echo "Starting config.php\n";
 
 /**
  * Simple .env file loader
  * Looks for .env file going up the directory tree
+ * This is for running with host php. You don't need this if you have docker php
  */
 function loadEnvFile() {
     // Start from current directory and go up
@@ -68,18 +78,26 @@ if (empty($pass)) {
     die($errorMsg);
 }
 
-$conn = new mysqli($host, $user, $pass, $db, $port);
+try {
+    $dsn = "mysql:host=$host;dbname=$db;port=$port;charset=utf8mb4";
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // throw exceptions
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // fetch as assoc arrays
+        PDO::ATTR_EMULATE_PREPARES   => false,                  // use native prepares
+    ];
 
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
+    $pdo = new PDO($dsn, $user, $pass, $options);
+
+} catch (PDOException $e) {
+    error_log("Database connection failed: " . $e->getMessage());
     die("Database connection failed. Please check your configuration (config.php).");
 }
 
 // Success check
 if (getenv('ENVIRONMENT') === 'development') {
     echo "Connected successfully to database: $db";
-    if ($envLoaded) {
-        echo " (.env file loaded)";
-    }
+    // if ($envLoaded) {
+    //     echo " (.env file loaded)";
+    // }
 }
 ?>

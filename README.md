@@ -24,12 +24,14 @@ First time using Docker hehe
    ```
 
 3. **Configure your environment**
+   
    Edit `.env` and set your database password:
    ```env
    DB_PASSWORD=your_secure_password_here
    ```
 
 4. **Start the application**
+    
     Make sure your terminal is in the same directory as the repo folder, otherwise it'll just
     say `no configuration file provided: not found`
    ```bash
