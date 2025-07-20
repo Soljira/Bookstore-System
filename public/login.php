@@ -9,7 +9,6 @@
     // include("./partials/header.php");
 ?>
 
-
 <!-- USE isset() and empty() -->
 <!DOCTYPE html>
 <html lang="en">

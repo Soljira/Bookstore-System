@@ -100,7 +100,7 @@ try {
                            $user, 
                            $pass, 
                            $db, 
-                               $port);
+                           $port);
 
 } catch (PDOException $e) {
     error_log("Database connection failed: " . $e->getMessage());

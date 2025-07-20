@@ -1,0 +1,57 @@
+<!-- Sidebar -->
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <h2>
+            <?php echo $_SERVER['PHP_SELF'];?>
+        </h2>
+    </div>
+    <h3>Data</h3>
+    <ul class="main-nav-list">
+        <li>
+            <a href="../navigation/books.php" id="nav-books" class="active"
+                ><i class="fas fa-book"></i> Books
+            </a>
+        </li>
+        <li>
+            <a href="../navigation/authors.php" id="nav-authors"
+                ><i class="fas fa-pencil"></i> Authors
+            </a>
+        </li>
+        <li>
+            <a href="../navigation/publishers.php" id="nav-publishers"
+                ><i class="fas fa-stamp"></i> Publishers
+            </a>
+        </li>
+        <li>
+            <a href="../navigation/orders.php" id="nav-orders"
+                ><i class="fas fa-receipt"></i> Orders
+            </a>
+        </li>
+        <li>
+            <a href="../navigation/users.php" id="nav-users"
+                ><i class="fas fa-users"></i> Users
+            </a>
+        </li>
+    </ul>
+
+    <ul class="footer-nav-list">
+        <li>
+            <a
+                href="https://github.com/Soljira/Bookstore-System"
+                id="nav-github"
+                ><i class="fa-brands fa-github"></i> Github
+            </a>
+        </li>
+        <li>
+            <a href="../navigation/support.php" id="nav-support"
+                ><i class="fa-solid fa-envelope"></i> Support
+            </a>
+        </li>
+        <!-- TODO: UNSET SESSION VARIABLES WHEN LOGGING OUT -->
+        <li>
+            <a href="../login.php" id="nav-logout"
+                ><i class="fa-solid fa-right-from-bracket"></i> Log out
+            </a>
+        </li>
+    </ul>
+</nav>
