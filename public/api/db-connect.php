@@ -2,12 +2,14 @@
 /**
  * This should work regardless if you run this with host php or via docker
  * To run with php in host, type in terminal:
- *  php public/api/config.php
+ *  php public/api/db-connect.php
  * To run with docker, type in terminal:
- *  docker exec -it bookstore-php-1 php /var/www/html/api/config.php
+ *  docker exec -it bookstore-php-1 php /var/www/html/api/db-connect.php
  */
 
-echo "Starting config.php\n";
+
+// Uncommenting echo will mess up login.php
+// echo "Starting db-connect.php" . "<br>";
 
 /**
  * Simple .env file loader
@@ -68,6 +70,8 @@ $db   = getenv('DB_NAME') ?: 'bookstoreDB';
 $port = getenv('DB_PORT') ?: 3306;
 
 // Validate that required environment variables are set
+
+// TODO: Only accept connection if getenv('ENVIRONMENT') === 'development
 if (empty($pass)) {
     $errorMsg = "CONFIGURATION ERROR: DB_PASSWORD not found. ";
     if (!$envLoaded) {
@@ -86,16 +90,27 @@ try {
         PDO::ATTR_EMULATE_PREPARES   => false,                  // use native prepares
     ];
 
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = new PDO($dsn, 
+                $user, 
+                $pass, 
+                $options);
+
+    // redundant, but i need mysqli for my queries. i havent mastered pdo yet
+    $conn = mysqli_connect($host,
+                           $user, 
+                           $pass, 
+                           $db, 
+                               $port);
 
 } catch (PDOException $e) {
     error_log("Database connection failed: " . $e->getMessage());
-    die("Database connection failed. Please check your configuration (config.php).");
+    die("Database connection failed. Please check your configuration (db-connect.php). <br>Make sure you're connected to the MySQL server.");
 }
 
 // Success check
+// Uncommenting echo will mess up login.php
 if (getenv('ENVIRONMENT') === 'development') {
-    echo "Connected successfully to database: $db";
+    // echo "Connected successfully to database: $db" . "<br>";
     // if ($envLoaded) {
     //     echo " (.env file loaded)";
     // }
