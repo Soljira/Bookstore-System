@@ -24,6 +24,10 @@
                             <!-- This will create rows accdg. to the database data -->
                             <td><?php echo htmlspecialchars($row['authorID']) ?></td>
                             <td><?php echo htmlspecialchars($row['authorName']) ?></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                            </td>
                         </tr>
                         <?php // Back to php; the closing tag should be the one in the end
                         break;
@@ -38,6 +42,10 @@
                             <td><?php echo htmlspecialchars($row['bookGenre']) ?></td>
                             <td><?php echo htmlspecialchars($row['bookQuantity']) ?></td>
                             <td><?php echo htmlspecialchars($row['bookPrice']) ?></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                            </td>                            
                         </tr>
                         <?php
                         break;
@@ -48,6 +56,10 @@
                             <td><?php echo htmlspecialchars($row['bookID']) ?></td>
                             <td><?php echo htmlspecialchars($row['quantity']) ?></td>
                             <td><?php echo htmlspecialchars($row['unitPrice']) ?></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                            </td>                            
                         </tr>
                         <?php
                         break;
@@ -58,6 +70,10 @@
                             <td><?php echo htmlspecialchars($row['publisherID']) ?></td>
                             <td><?php echo htmlspecialchars($row['publisherName']) ?></td>
                             <td><?php echo htmlspecialchars($row['publisherAddress']) ?></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                            </td>                            
                         </tr>
                         <?php
                         break;
@@ -69,6 +85,10 @@
                             <td><?php echo htmlspecialchars($row['username']) ?></td>
                             <td><?php echo htmlspecialchars($row['password']) ?></td>
                             <td><?php echo htmlspecialchars($row['createdAt']) ?></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                            </td>                            
                         </tr>
                         <?php
                         break;

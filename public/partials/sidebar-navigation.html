@@ -1,57 +1,63 @@
 <!-- Sidebar -->
-<nav class="sidebar">
+ <!-- TODO: Manually edit the styles of the Bootstrap Dropdown menu bc it may conflict -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="sidebar-header">
         <h2>
             <?php echo $_SERVER['PHP_SELF'];?>
         </h2>
     </div>
-    <h3>Data</h3>
-    <ul class="main-nav-list">
-        <li>
-            <a href="../navigation/books.php" id="nav-books" class="active"
-                ><i class="fas fa-book"></i> Books
-            </a>
-        </li>
-        <li>
-            <a href="../navigation/authors.php" id="nav-authors"
-                ><i class="fas fa-pencil"></i> Authors
-            </a>
-        </li>
-        <li>
-            <a href="../navigation/publishers.php" id="nav-publishers"
-                ><i class="fas fa-stamp"></i> Publishers
-            </a>
-        </li>
-        <li>
-            <a href="../navigation/orders.php" id="nav-orders"
-                ><i class="fas fa-receipt"></i> Orders
-            </a>
-        </li>
-        <li>
-            <a href="../navigation/users.php" id="nav-users"
-                ><i class="fas fa-users"></i> Users
-            </a>
-        </li>
-    </ul>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Data</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    <!-- <h3>Data</h3> -->
 
-    <ul class="footer-nav-list">
-        <li>
-            <a
-                href="https://github.com/Soljira/Bookstore-System"
-                id="nav-github"
-                ><i class="fa-brands fa-github"></i> Github
-            </a>
-        </li>
-        <li>
-            <a href="../navigation/support.php" id="nav-support"
-                ><i class="fa-solid fa-envelope"></i> Support
-            </a>
-        </li>
-        <!-- TODO: UNSET SESSION VARIABLES WHEN LOGGING OUT -->
-        <li>
-            <a href="../login.php" id="nav-logout"
-                ><i class="fa-solid fa-right-from-bracket"></i> Log out
-            </a>
-        </li>
-    </ul>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="../navigation/books.php" id="nav-books"
+                        ><i class="fas fa-book"></i> Books
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../navigation/authors.php" id="nav-authors"
+                        ><i class="fas fa-pencil"></i> Authors
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../navigation/publishers.php" id="nav-publishers"
+                        ><i class="fas fa-stamp"></i> Publishers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../navigation/orders.php" id="nav-orders"
+                        ><i class="fas fa-receipt"></i> Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../navigation/users.php" id="nav-users"
+                        ><i class="fas fa-users"></i> Users
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="https://github.com/Soljira/Bookstore-System">Github</a></li>
+                        <li><a class="dropdown-item" href="../login.php">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+                <!-- <li>
+                    <a href="../navigation/support.php" id="nav-support"
+                        ><i class="fa-solid fa-envelope"></i> Support
+                    </a>
+                </li> -->
+
+                <!-- TODO: UNSET SESSION VARIABLES WHEN LOGGING OUT -->
+
+        </div>
+    </div>
 </nav>
