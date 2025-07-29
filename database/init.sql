@@ -93,7 +93,7 @@ INSERT IGNORE INTO bookTable (bookTitle, bookAuthor, bookPublisher, bookPublicat
 ('Adventures of Huckleberry Finn', 2, 2, '1884-12-10', 'Adventure', 5, 12.50),
 ('Great Expectations', 3, 3, '1861-08-01', 'Drama', 8, 11.75),
 ('War and Peace', 4, 4, '1869-01-01', 'Historical', 3, 15.00),
-('Harry Potter and the Sorcerer\'s Stone', 5, 5, '1997-06-26', 'Fantasy', 20, 20.00),
+('Harry Potter and the Sorcerer''s Stone', 5, 5, '1997-06-26', 'Fantasy', 20, 20.00),
 ('1984', 6, 1, '1949-06-08', 'Dystopian', 15, 13.99),
 ('Murder on the Orient Express', 7, 2, '1934-01-01', 'Mystery', 7, 10.99),
 ('The Great Gatsby', 8, 3, '1925-04-10', 'Classic', 9, 14.25),

@@ -1,5 +1,11 @@
 <?php
     require_once("./php-scripts/start-session.php");
+
+    if (!isset($_SESSION['userID'])) {
+        ob_end_clean(); // Clear any previous output
+        echo json_encode(['success' => false, 'error' => 'Unauthorized']);
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>

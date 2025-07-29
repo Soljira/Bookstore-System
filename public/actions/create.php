@@ -2,6 +2,10 @@
     require_once("../php-scripts/start-session.php");
     // $test = $_POST['newItem'];
     // echo $test;
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,27 +26,83 @@
 
         $selectedTable = $_POST['newItem'];
 
+                    //         $tables = array();
+                    // $sql1 = "SHOW TABLES";
+                    // $result1 = mysqli_query($conn,$sql1);
+
+                    // while ($row1= mysqli_fetch_row($result1)) {
+                    //     $tables[] = $row1[0];
+                    // }       
+                    
+        // THIS IS FOR KEEPING TRACK OF WHICH TABLE THE PROGRAM IS IN WHEN GENERATING TEXT INPUTS    
+        // USED IN LINE 153        
+        $tables = array("authorTable","bookTable","orderItemTable", "publisherTable", "users");                              
+        $tableIndex = 0;            
+
         switch ($_POST['newItem']) {
             case "authorNewItem":
                 $selectedTable = "authorTable";
+                $tableIndex = 0;
+                $_SESSION['selectedTable'] = $selectedTable;  // This is for insert-data.php
+                // $authorID;
+                // $authorName;
                 break;
             case "bookNewItem":
                 $selectedTable = "bookTable";
+                $tableIndex = 1;
+                $_SESSION['selectedTable'] = $selectedTable;
+                // $bookID	= 0;
+                // $bookTitle = "";
+                // $bookAuthor = 0;
+                // $bookPublisher = 0;	
+                // $bookPublicationDate = "";
+                // $bookGenre = "";
+                // $bookQuantity = 0;	
+                // $bookPrice = 0.0;
                 break;
             case "orderNewItem":
                 $selectedTable = "orderItemTable";
+                $tableIndex = 2;
+                $_SESSION['selectedTable'] = $selectedTable;
                 break;
             case "publisherNewItem":
                 $selectedTable = "publisherTable";
+                $tableIndex = 3;
+                $_SESSION['selectedTable'] = $selectedTable;
                 break;
             case "userNewItem":
                 $selectedTable = "users";
+                $tableIndex = 4;
+                $_SESSION['selectedTable'] = $selectedTable;
                 break;
         }
 
         // 2. Fetch the data from the database (using MySQLi)
         $sql = "SHOW COLUMNS FROM $selectedTable";
-        $result = mysqli_query($conn, $sql);
+        
+        // THIS WILL ONLY FETCH THE TABLE COLUMN NAMES
+        $result = mysqli_query($conn, $sql);    
+        while ($row = mysqli_fetch_assoc($result)) {
+            $columnName = $row['Field'];
+            // foreach ($columnName as $value) {
+            //     echo $value;
+
+            // }
+            // echo $columnName;
+            $$columnName = null;
+
+            // if (isset($_POST[$columnName])) {
+            //     $$columnName = $_POST[$columnName];  // $$ is a variable variable
+            //     // echo "test";
+            // } else {
+            //     // echo "test";
+
+            //     $$columnName = null;
+            // }
+        }
+
+        // Resets $row DO NOT COMMENT THIS OUT BECAUSE TEXT INPUTS WONT WORK
+        $result = mysqli_query($conn, $sql); 
     ?>
 
     <div class="container my-5">
@@ -51,34 +111,90 @@
                 if (mysqli_num_rows($result) > 0) {
                     switch ($_POST['newItem']) {
                         case "authorNewItem":
-                            ?><h2>New Author Item</h2><?php                 
+                            ?><h2>New Author Item</h2><?php         
+                            // $authorID = $_POST['authorID'];
+                            // $authorName	= $_POST['authorName'];
                             break;
                         case "bookNewItem":
-                            ?><h2>New Book Item</h2><?php                 
+                            ?><h2>New Book Item</h2><?php
+                            // $bookID = $_POST['bookID'];
+                            // $bookTitle = $_POST['authorID'];
+                            // $bookAuthor = $_POST['bookAuthor'];
+                            // $bookPublisher = $_POST['bookPublisher'];
+                            // $bookPublicationDate = $_POST['bookPublicationDate'];
+                            // $bookGenre = $_POST['bookGenre'];
+                            // $bookQuantity = $_POST['bookQuantity'];
+                            // $bookPrice = $_POST['bookPrice'];                                          
                             break;
                         case "orderNewItem":
-                            ?><h2>New Order Item</h2><?php                 
+                            ?><h2>New Order Item</h2><?php
+                            // $orderID = $_POST['orderID'];
+                            // $bookID = $_POST['bookID'];
+                            // $quantity = $_POST['quantity'];
+                            // $unitPrice = $_POST['unitPrice'];        
                             break;
                         case "publisherNewItem":
-                            ?><h2>New Publisher Item</h2><?php                 
+                            ?><h2>New Publisher Item</h2><?php
+                            // $publisherID = $_POST['publisherID'];
+                            // $publisherName = $_POST['publisherName'];
+                            // $publisherAddress = $_POST['publisherAddress'];
                             break;
                         case "userNewItem":
-                            ?><h2>New User</h2><?php                 
+                            ?><h2>New User</h2><?php
                             break;
                     } // End of switch statements 
+
                     
+                    // Get the next AUTO_INCREMENT value for the selected table
+                    // Why is this not working for userID?
+                    /* 
+                     * Fixed this by manually inserting the initial user in mysql command line
+                     * Entering data via adminer doesn't work somehow. Find out why and fix adminer
+                     */
+                    $autoIncrementQuery = "SHOW TABLE STATUS LIKE '$selectedTable'";
+                    $autoIncrementResult = mysqli_query($conn, $autoIncrementQuery);
+                    $autoIncrementRow = mysqli_fetch_assoc($autoIncrementResult);
+                    $nextID = $autoIncrementRow['Auto_increment'];
+                    
+                    // Debugging print statements
+                    // echo "Selected table " . $selectedTable . "<br>";
+                    // echo "Next ID: " . $nextID;
+
                     // This will print all table columns
                     while ($row = mysqli_fetch_assoc($result)) {
+                        // $tableCount = 0;
+                        // echo $tables[$tableIndex];
                         $columnName = htmlspecialchars($row['Field']);
+                        // $columnName;
                     ?>
-                        <form id="newItemForm" method="POST" action=>
+                        <form id="newItemForm" method="POST" action="../php-scripts/insert-data.php">
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">
-                                    <?php echo $columnName?>
+                                    <?php 
+                                        // This will remove the createdAt input field because createdAt is purely for keeping integrity
+                                        if ($columnName != "createdAt") {
+                                            echo $columnName;
+                                        }
+                                    ?>
                                 </label>
-
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="<?php echo $columnName; ?>" value="">
+                                    <?php if ($columnName == "createdAt") {
+                                        continue;
+                                    } elseif ($tables[$tableIndex] == "orderItemTable") { ?>
+                                        <input type="text" class="form-control" 
+                                            name="<?php echo $columnName; ?>" 
+                                            value="">                                    
+                                    <?php                                     
+                                    } elseif (stripos($columnName, "ID") !== false) { ?>
+                                        <input type="text" class="form-control" 
+                                            name="<?php echo $columnName; ?>" 
+                                            value="<?php echo $nextID; ?>" readonly>                                    
+                                    <?php 
+                                    } else { ?>
+                                        <input type="text" class="form-control" 
+                                            name="<?php echo $columnName; ?>" 
+                                            value="">
+                                    <?php } ?>
                                 </div>
                             </div>
                         <?php
@@ -86,7 +202,7 @@
                             <div class="row mb-3">
                                 <!-- <label class="col-sm-3 col-form-label">Name</label> -->
                                 <div class="offset-sm-3 col-sm-3 d-grid">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" name="newItemSubmit">Submit</button>
                                 </div>
                                 <div class="col-sm-3 d-grid">
                                     <a href="./.." class="btn btn-outline-primary" role="button">Cancel</a>

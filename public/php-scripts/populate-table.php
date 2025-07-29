@@ -25,8 +25,8 @@
                             <td><?php echo htmlspecialchars($row['authorID']) ?></td>
                             <td><?php echo htmlspecialchars($row['authorName']) ?></td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php?id=authorID<?php echo $row['authorID']?>">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?id=authorID<?php echo $row['authorID']?>">Delete</a>
                             </td>
                         </tr>
                         <?php // Back to php; the closing tag should be the one in the end
@@ -42,9 +42,10 @@
                             <td><?php echo htmlspecialchars($row['bookGenre']) ?></td>
                             <td><?php echo htmlspecialchars($row['bookQuantity']) ?></td>
                             <td><?php echo htmlspecialchars($row['bookPrice']) ?></td>
+                            <!-- THIS IS GARBAGE CODE; FIX -->
                             <td>
-                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php?id=bookID<?php echo $row['bookID']?>">Edit</a> 
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.phpid=bookID<?php echo $row['bookID']?>">Delete</a>
                             </td>                            
                         </tr>
                         <?php
@@ -57,8 +58,8 @@
                             <td><?php echo htmlspecialchars($row['quantity']) ?></td>
                             <td><?php echo htmlspecialchars($row['unitPrice']) ?></td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php?id=orderID<?php echo $row['orderID']?>">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?id=orderID<?php echo $row['orderID']?>">Delete</a>
                             </td>                            
                         </tr>
                         <?php
@@ -71,8 +72,8 @@
                             <td><?php echo htmlspecialchars($row['publisherName']) ?></td>
                             <td><?php echo htmlspecialchars($row['publisherAddress']) ?></td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php?id=publisherID<?php echo $row['publisherID']?>">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?id=publisherID<?php echo $row['publisherID']?>">Delete</a>
                             </td>                            
                         </tr>
                         <?php
@@ -86,8 +87,8 @@
                             <td><?php echo htmlspecialchars($row['password']) ?></td>
                             <td><?php echo htmlspecialchars($row['createdAt']) ?></td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="../actions/edit.php">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php">Delete</a>
+                                <a class="btn btn-primary btn-sm" href="../actions/edit.php?id=userID<?php echo $row['userID']?>">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?id=userID<?php echo $row['userID']?>">Delete</a>
                             </td>                            
                         </tr>
                         <?php
