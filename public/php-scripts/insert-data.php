@@ -70,6 +70,7 @@
          *  MAYBE MODULARIZE THE CODE ABOVE BC ITS JUST GETTING DATA FROM THE PREV PAGE
          */
 
+        // TODO: Error handling for duplicate values (such as username)
 
         // 5. Insert the compiled data into database
         $sql = "INSERT INTO $selectedTable($combinedColumns) VALUES ($combinedValues)";
@@ -84,7 +85,7 @@
             // echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
-        $sql = "ANALYZE $selectedTable";
+        $sql = "ANALYZE TABLE $selectedTable";
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         exit();

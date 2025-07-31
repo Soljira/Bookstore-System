@@ -128,7 +128,7 @@
 
                     // Debugging print statements
                     // echo "Selected table " . $selectedTable . "<br>";
-                    echo "Next ID: " . $nextID;
+                    // echo "Next ID: " . $nextID;
 
                     // This will print all table columns
                     while ($row = mysqli_fetch_assoc($result)) {
