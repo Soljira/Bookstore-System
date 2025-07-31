@@ -1,13 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous" defer></script>
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+require_once("../php-scripts/start-session.php");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $table = $_SESSION['selectedTable'];
+
+    $idMap = [
+        "authorTable" => "authorID",
+        "bookTable" => "bookID",
+        "orderItemTable" => "orderID",
+        "publisherTable" => "publisherID",
+        "users" => "userID"
+    ];
+
+    if (!array_key_exists($table, $idMap)) {
+        $_SESSION['errors'] = ["Unknown table for deletion."];
+        header("Location: " . $_SESSION['selectedTablePage']);
+        exit();
+    }
+
+    $idField = $idMap[$table];
+
+    if (!isset($_POST[$idField])) {
+        $_SESSION['errors'] = ["No ID provided for deletion."];
+        header("Location: " . $_SESSION['selectedTablePage']);
+        exit();
+    }
+
+    $idValue = intval($_POST[$idField]); 
+
+    $sql = "DELETE FROM $table WHERE $idField = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $idValue);
+
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['Success'] = ["Record deleted successfully"];
+    } else {
+        $_SESSION['errors'] = ["Error deleting record: " . mysqli_error($conn)];
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+
+    header("Location: " . $_SESSION['selectedTablePage']);
+    exit();
+
+} else {
+    $_SESSION['errors'] = ["Invalid request method."];
+    header("Location: " . $_SESSION['selectedTablePage']);
+    exit();
+}
+?>

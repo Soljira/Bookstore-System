@@ -26,7 +26,13 @@
                             <td><?php echo htmlspecialchars($row['authorName']) ?></td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="../actions/edit.php?authorID=<?php echo $row['authorID']?>">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?authorID=<?php echo $row['authorID']?>">Delete</a>
+                                <form method="POST" action="../actions/delete.php" style="display:inline;">
+                                    <input type="hidden" name="authorID" value="<?php echo $row['authorID']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this?');">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         <?php // Back to php; the closing tag should be the one in the end
@@ -45,7 +51,13 @@
                             <!-- THIS IS GARBAGE CODE; FIX -->
                             <td>
                                 <a class="btn btn-primary btn-sm" href="../actions/edit.php?bookID=<?php echo $row['bookID']?>">Edit</a> 
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?bookID=<?php echo $row['bookID']?>">Delete</a>
+                                <form method="POST" action="../actions/delete.php" style="display:inline;">
+                                    <input type="hidden" name="bookID" value="<?php echo $row['bookID']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this?');">
+                                        Delete
+                                    </button>
+                                </form>                                
                             </td>                            
                         </tr>
                         <?php
@@ -59,7 +71,13 @@
                             <td><?php echo htmlspecialchars($row['unitPrice']) ?></td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="../actions/edit.php?orderID=<?php echo $row['orderID']?>">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?orderID=<?php echo $row['orderID']?>">Delete</a>
+                                <form method="POST" action="../actions/delete.php" style="display:inline;">
+                                    <input type="hidden" name="orderID" value="<?php echo $row['orderID']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this?');">
+                                        Delete
+                                    </button>
+                                </form>                                
                             </td>                            
                         </tr>
                         <?php
@@ -73,7 +91,13 @@
                             <td><?php echo htmlspecialchars($row['publisherAddress']) ?></td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="../actions/edit.php?publisherID=<?php echo $row['publisherID']?>">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?publisherID=<?php echo $row['publisherID']?>">Delete</a>
+                                <form method="POST" action="../actions/delete.php" style="display:inline;">
+                                    <input type="hidden" name="publisherID" value="<?php echo $row['publisherID']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this?');">
+                                        Delete
+                                    </button>
+                                </form>                                
                             </td>                            
                         </tr>
                         <?php
@@ -88,7 +112,13 @@
                             <td><?php echo htmlspecialchars($row['createdAt']) ?></td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="../actions/edit.php?userID=<?php echo $row['userID']?>">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="../actions/delete.php?userID=<?php echo $row['userID']?>">Delete</a>
+                                <form method="POST" action="../actions/delete.php" style="display:inline;">
+                                    <input type="hidden" name="userID" value="<?php echo $row['userID']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this?');">
+                                        Delete
+                                    </button>
+                                </form>                                
                             </td>                            
                         </tr>
                         <?php
