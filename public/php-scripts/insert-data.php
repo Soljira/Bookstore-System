@@ -20,7 +20,7 @@
         $columnArrayFields = array();
         $columnArrayValues = array();
 
-        // 2. Fetch the data from the database (using MySQLi)
+        // 2. Retrieves data from user input
         // 3. Get the auto-incremented ID from the form (changing disabled to readonly will send the data)
         // remove createdAt
         $sql = "SHOW COLUMNS FROM $selectedTable";
@@ -85,7 +85,7 @@
             // echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
-        $sql = "ANALYZE TABLE $selectedTable";
+        $sql = "ANALYZE TABLE $selectedTable";  // i need this so the auto-incremented keys can actually update
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         exit();

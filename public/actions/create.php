@@ -13,9 +13,9 @@
 </head>
 <body>
     <!-- Tutorial used: https://www.youtube.com/watch?v=NqP0-UkIQS4 -->
-
     <?php
         include("../partials/header.html");
+        include("../partials/sidebar-navigation.html");
 
         $selectedTable = $_SESSION['selectedTable'];
 
@@ -67,6 +67,7 @@
         $sql = "SHOW COLUMNS FROM $selectedTable";
         
         // THIS WILL ONLY FETCH THE TABLE COLUMN NAMES
+        // i forgot what this does
         $result = mysqli_query($conn, $sql);    
         while ($row = mysqli_fetch_assoc($result)) {
             $columnName = $row['Field'];
@@ -121,6 +122,7 @@
                      * TODO: This is supposedly inefficient so find a better way
                      * Solution found in: https://stackoverflow.com/questions/65996700/problem-with-auto-increment-value-in-table-schema-not-updating 
                      */
+                    // TODO: use generate-input-fields.php instead
                     $autoIncrementQuery = "SHOW TABLE STATUS LIKE '$selectedTable'";
                     $autoIncrementResult = mysqli_query($conn, $autoIncrementQuery);
                     $autoIncrementRow = mysqli_fetch_assoc($autoIncrementResult);
@@ -131,6 +133,7 @@
                     // echo "Next ID: " . $nextID;
 
                     // This will print all table columns
+                    // TODO: MODULARIZE THIS SO I CAN REUSE
                     while ($row = mysqli_fetch_assoc($result)) {
                         // $tableCount = 0;
                         // echo $tables[$tableIndex];
