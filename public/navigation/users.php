@@ -45,6 +45,7 @@
             <?php
                 include("../php-scripts/populate-table.php");
                 populateTable("users", $conn);
+                $_SESSION['selectedTable'] = "users";
                 mysqli_close($conn);
             ?>
         </table>

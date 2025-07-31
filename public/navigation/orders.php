@@ -45,6 +45,7 @@
             <?php
                 include("../php-scripts/populate-table.php");
                 populateTable("orderItemTable", $conn);
+                $_SESSION['selectedTable'] = "orderItemTable";
                 mysqli_close($conn);
             ?>
         </table>

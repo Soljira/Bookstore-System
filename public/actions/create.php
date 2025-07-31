@@ -1,11 +1,5 @@
 <?php
     require_once("../php-scripts/start-session.php");
-    // $test = $_POST['newItem'];
-    // echo $test;
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +17,7 @@
     <?php
         include("../partials/header.html");
 
-        $selectedTable = $_POST['newItem'];
+        $selectedTable = $_SESSION['selectedTable'];
 
         // This will print the errors from insert-data.php
         foreach ($errors as $error): ?>
@@ -46,32 +40,28 @@
         // $_SERVER['HTTP_REFERER'] contains the URL of the page that linked to the current page.
         $_SESSION['selectedTablePage'] = $_SERVER['HTTP_REFERER'];  // This is for referencing the table name for page navigation purposes in insert-data.php
 
-        switch ($_POST['newItem']) {
-            case "authorNewItem":
-                $selectedTable = "authorTable";
+        switch ($selectedTable) {
+            case "authorTable":
                 $tableIndex = 0;
                 break;
-            case "bookNewItem":
-                $selectedTable = "bookTable";
+            case "bookTable":
                 $tableIndex = 1;
                 break;
-            case "orderNewItem":
-                $selectedTable = "orderItemTable";
+            case "orderItemTable":
                 $tableIndex = 2;
                 break;
-            case "publisherNewItem":
-                $selectedTable = "publisherTable";
+            case "publisherTable":
                 $tableIndex = 3;
                 break;
-            case "userNewItem":
-                $selectedTable = "users";
+            case "users":
                 $tableIndex = 4;
                 break;
         }
 
         // TODO: ID not autoincrementing when inserting new data
+        // TODO: Do something about bookAuthor field
+        // TODO: bookPublicationDate should have a datePicker
 
-        $_SESSION['selectedTable'] = $selectedTable;  // This is for referencing the actual table name in insert-data.php
 
         // 2. Fetch the data from the database (using MySQLi)
         $sql = "SHOW COLUMNS FROM $selectedTable";
@@ -123,21 +113,22 @@
                             break;
                     } // End of switch statements 
 
-                    
                     // Get the next AUTO_INCREMENT value for the selected table
                     // Why is this not working for userID?
                     /* 
-                     * Fixed this by manually inserting the initial user in mysql command line
                      * Entering data via adminer doesn't work somehow. Find out why and fix adminer
+                     * FIXED informationschema not updating by querying ANALYZE TABLE table_name; every after update
+                     * TODO: This is supposedly inefficient so find a better way
+                     * Solution found in: https://stackoverflow.com/questions/65996700/problem-with-auto-increment-value-in-table-schema-not-updating 
                      */
                     $autoIncrementQuery = "SHOW TABLE STATUS LIKE '$selectedTable'";
                     $autoIncrementResult = mysqli_query($conn, $autoIncrementQuery);
                     $autoIncrementRow = mysqli_fetch_assoc($autoIncrementResult);
                     $nextID = $autoIncrementRow['Auto_increment'];
-                    
+
                     // Debugging print statements
                     // echo "Selected table " . $selectedTable . "<br>";
-                    // echo "Next ID: " . $nextID;
+                    echo "Next ID: " . $nextID;
 
                     // This will print all table columns
                     while ($row = mysqli_fetch_assoc($result)) {

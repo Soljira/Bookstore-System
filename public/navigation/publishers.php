@@ -44,6 +44,7 @@
             <?php
                 include("../php-scripts/populate-table.php");
                 populateTable("publisherTable", $conn);
+                $_SESSION['selectedTable'] = "publisherTable";
                 mysqli_close($conn);
             ?>
         </table>

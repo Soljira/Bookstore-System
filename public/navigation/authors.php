@@ -45,6 +45,7 @@
             <?php
                 include("../php-scripts/populate-table.php");
                 populateTable("authorTable", $conn);
+                $_SESSION['selectedTable'] = "authorTable";  // This is for referencing the actual table name in insert-data.php
                 mysqli_close($conn);
             ?>
         </table>

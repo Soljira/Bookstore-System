@@ -12,7 +12,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newItemSubmit'])) {
         // echo "Selected Table: " . $_SESSION['selectedTable'] . "<br>";  // This is set in create.php in switch statements (line 46)
-        $selectedTable = $_SESSION['selectedTable'];
+        $selectedTable = $_SESSION['selectedTable'];  // 1. Get the current table 
     }
 
         // Since this file doesn't exactly know which table it's pulling the data from unless the user submitted create.php, use arrays instead
@@ -41,10 +41,7 @@
             }            
         }
 
-        // Debugging print statements
-
-        // combine all strings from the foreach into one variable and just insert it to the parameter because i cant use a foreach loop in the insert into sql statement
-        
+        // combine all strings from the foreach into one variable and just insert it to the parameter because i cant use a foreach loop in the insert into sql statement        
         $combinedColumns = "";
         // skip the first element because its usually an id, and mysql takes care of auto-incrementing it
         for ($x = 1; $x < count($columnArrayFields); $x++) {
@@ -55,6 +52,7 @@
             }            
         }
 
+        // TODO: Filter and sanitize inputs because mysql gives an error when you type \ 
         // echo "Columns: " . $combinedColumns . "<br>";
         $combinedValues = "";
         for ($y = 1; $y < count($columnArrayValues); $y++) {
@@ -64,23 +62,30 @@
                 $combinedValues = $combinedValues . ", '" . $columnArrayValues[$y] . "'";
             }            
         }
+        
         // echo "Values: " . $combinedValues . "<br>";
-
         // echo $selectedTable($combinedColumns);
         
+        /*
+         *  MAYBE MODULARIZE THE CODE ABOVE BC ITS JUST GETTING DATA FROM THE PREV PAGE
+         */
+
+
         // 5. Insert the compiled data into database
         $sql = "INSERT INTO $selectedTable($combinedColumns) VALUES ($combinedValues)";
 
         // 6. Redirect to the previous table page 
         if (mysqli_query($conn, $sql)) {
             $_SESSION['Success'] = ["New record created successfully"];
-            header("Location: " . $_SESSION['selectedTablePage']);  // The set variable in create.php line 51 (there surely must be a better way to handle page redirects)
+            header("Location: " . $_SESSION['selectedTablePage']);  // The set variable in create.php line 68 (there surely must be a better way to handle page redirects)
         } else {
             $_SESSION['errors'] = ["Invalid data"];
             header("Location: " . $_SESSION['selectedTablePage']);
             // echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
+        $sql = "ANALYZE $selectedTable";
+        mysqli_query($conn, $sql);
         mysqli_close($conn);
         exit();
 ?>

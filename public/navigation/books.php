@@ -50,6 +50,7 @@
             <?php
                 include("../php-scripts/populate-table.php");
                 populateTable("bookTable", $conn);
+                $_SESSION['selectedTable'] = "bookTable";
                 mysqli_close($conn);
             ?>
         </table>
