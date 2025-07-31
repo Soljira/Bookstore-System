@@ -28,7 +28,7 @@
     <div class="container my-5">
         <h2>Orders</h2>
         <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        <form method="POST" action="../actions/create.php">
+        <form method="POST" action="../actions/create.php?orderItemTable">
             <button type="submit" name="newItem" value="orderNewItem" class="btn btn-success">+ New Item</button>
         </form>             
         

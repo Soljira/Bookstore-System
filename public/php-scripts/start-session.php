@@ -7,17 +7,24 @@
     // so if index.php calls start-session.php, the pathing will skip public because
     // index.php is in the root folder in the first place.
 
+    // Array for storing error messages
     $errors = [];
     if (!empty($_SESSION['errors'])) {
         $errors = $_SESSION['errors'];
         unset($_SESSION['errors']);
     }
 
+    // Array for storing success messages
+    $success = [];
+    if (!empty($_SESSION['success'])) {
+        $errors = $_SESSION['success'];
+        unset($_SESSION['success']);
+    }
     // Redirects back to login.php if not logged in
     // This is to prevent people from just bypassing the login page and changing the url to http://localhost:8080/index.php
     if (!isset($_SESSION['username'])) {
         $_SESSION['errors'] = ["Unauthorized"];  // This is what login.php will print
-        header('Location: ../login.php');
+        header('Location: ../actions/login.php');
         exit();
     }
 ?>

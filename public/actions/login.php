@@ -5,7 +5,7 @@
         $errors = $_SESSION['errors'];
         unset($_SESSION['errors']);
     }
-    include("./api/db-connect.php")
+    include("../api/db-connect.php")
     // include("./partials/header.php");
 ?>
 
@@ -16,7 +16,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bookstore System Admin Panel - Login</title>
-        <link rel="stylesheet" href="./css/login.css">
+        <link rel="stylesheet" href="../css/login.css">
     </head>
     <body>
         <!-- <div class="container">
@@ -38,7 +38,7 @@
                 </div>
             <?php endif; ?>
 
-        <form id="loginForm" method="POST" action="authenticateUser.php">
+        <form id="loginForm" method="POST" action="../authenticate-user.php">
             <input type="username" id="username" name="username" placeholder="Enter your username">
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
             <input type="submit" class="btn" value="Log In" name="login"></input>

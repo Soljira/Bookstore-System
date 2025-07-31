@@ -28,7 +28,7 @@
     <div class="container my-5">
         <h2>Books</h2>
 
-        <form method="POST" action="../actions/create.php">
+        <form method="POST" action="../actions/create.php?bookTable">
             <button type="submit" name="newItem" value="bookNewItem" class="btn btn-success">+ New Item</button>
         </form>        
         <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->

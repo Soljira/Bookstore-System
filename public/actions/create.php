@@ -19,12 +19,16 @@
 </head>
 <body>
     <!-- Tutorial used: https://www.youtube.com/watch?v=NqP0-UkIQS4 -->
-    <!-- TODO: Make switch statements like populateTable -->
 
     <?php
         include("../partials/header.html");
 
         $selectedTable = $_POST['newItem'];
+
+        // This will print the errors from insert-data.php
+        foreach ($errors as $error): ?>
+        <p><?= htmlspecialchars($error) ?></p>
+        <?php endforeach;      
 
                     //         $tables = array();
                     // $sql1 = "SHOW TABLES";
@@ -38,44 +42,36 @@
         // USED IN LINE 153        
         $tables = array("authorTable","bookTable","orderItemTable", "publisherTable", "users");                              
         $tableIndex = 0;            
+        
+        // $_SERVER['HTTP_REFERER'] contains the URL of the page that linked to the current page.
+        $_SESSION['selectedTablePage'] = $_SERVER['HTTP_REFERER'];  // This is for referencing the table name for page navigation purposes in insert-data.php
 
         switch ($_POST['newItem']) {
             case "authorNewItem":
                 $selectedTable = "authorTable";
                 $tableIndex = 0;
-                $_SESSION['selectedTable'] = $selectedTable;  // This is for insert-data.php
-                // $authorID;
-                // $authorName;
                 break;
             case "bookNewItem":
                 $selectedTable = "bookTable";
                 $tableIndex = 1;
-                $_SESSION['selectedTable'] = $selectedTable;
-                // $bookID	= 0;
-                // $bookTitle = "";
-                // $bookAuthor = 0;
-                // $bookPublisher = 0;	
-                // $bookPublicationDate = "";
-                // $bookGenre = "";
-                // $bookQuantity = 0;	
-                // $bookPrice = 0.0;
                 break;
             case "orderNewItem":
                 $selectedTable = "orderItemTable";
                 $tableIndex = 2;
-                $_SESSION['selectedTable'] = $selectedTable;
                 break;
             case "publisherNewItem":
                 $selectedTable = "publisherTable";
                 $tableIndex = 3;
-                $_SESSION['selectedTable'] = $selectedTable;
                 break;
             case "userNewItem":
                 $selectedTable = "users";
                 $tableIndex = 4;
-                $_SESSION['selectedTable'] = $selectedTable;
                 break;
         }
+
+        // TODO: ID not autoincrementing when inserting new data
+
+        $_SESSION['selectedTable'] = $selectedTable;  // This is for referencing the actual table name in insert-data.php
 
         // 2. Fetch the data from the database (using MySQLi)
         $sql = "SHOW COLUMNS FROM $selectedTable";
@@ -112,32 +108,15 @@
                     switch ($_POST['newItem']) {
                         case "authorNewItem":
                             ?><h2>New Author Item</h2><?php         
-                            // $authorID = $_POST['authorID'];
-                            // $authorName	= $_POST['authorName'];
                             break;
                         case "bookNewItem":
                             ?><h2>New Book Item</h2><?php
-                            // $bookID = $_POST['bookID'];
-                            // $bookTitle = $_POST['authorID'];
-                            // $bookAuthor = $_POST['bookAuthor'];
-                            // $bookPublisher = $_POST['bookPublisher'];
-                            // $bookPublicationDate = $_POST['bookPublicationDate'];
-                            // $bookGenre = $_POST['bookGenre'];
-                            // $bookQuantity = $_POST['bookQuantity'];
-                            // $bookPrice = $_POST['bookPrice'];                                          
                             break;
                         case "orderNewItem":
                             ?><h2>New Order Item</h2><?php
-                            // $orderID = $_POST['orderID'];
-                            // $bookID = $_POST['bookID'];
-                            // $quantity = $_POST['quantity'];
-                            // $unitPrice = $_POST['unitPrice'];        
                             break;
                         case "publisherNewItem":
                             ?><h2>New Publisher Item</h2><?php
-                            // $publisherID = $_POST['publisherID'];
-                            // $publisherName = $_POST['publisherName'];
-                            // $publisherAddress = $_POST['publisherAddress'];
                             break;
                         case "userNewItem":
                             ?><h2>New User</h2><?php
@@ -180,7 +159,7 @@
                                 <div class="col-sm-6">
                                     <?php if ($columnName == "createdAt") {
                                         continue;
-                                    } elseif ($tables[$tableIndex] == "orderItemTable") { ?>
+                                    } elseif ($tables[$tableIndex] == "orderItemTable") {   //whats this??>
                                         <input type="text" class="form-control" 
                                             name="<?php echo $columnName; ?>" 
                                             value="">                                    

@@ -28,14 +28,14 @@
     <div class="container my-5">
         <h2>Publishers</h2>
         <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        <form method="POST" action="../actions/create.php">
+        <form method="POST" action="../actions/create.php?publisherTable">
             <button type="submit" name="newItem" value="publisherNewItem" class="btn btn-success">+ New Item</button>
         </form>             
         
         <!-- 1. Create the table to be filled with data -->
         <table class="table">
             <tr>
-                <th>Publisher ID</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>Actions</th>

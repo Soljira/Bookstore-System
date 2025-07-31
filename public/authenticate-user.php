@@ -6,7 +6,7 @@
     /*
         1. Check if the submitted credentials aren't empty. If yes, return to login.php
         2. Check if the submitted credentials exist in the database. If no, return to login.php
-        3. If user credentials exist and match, go to index.php
+        3. If user credentials exist and match, go to index.php 
     */
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
@@ -31,7 +31,7 @@
                                     FILTER_SANITIZE_SPECIAL_CHARS);
         } else {
             $_SESSION['errors'] = ["Username and/or password are required."];
-            header('Location: login.php');
+            header('Location: ./actions/login.php');
             exit();
         }
 
@@ -52,7 +52,7 @@
             */
             if (!(password_verify($password, $row['password']))) {  // If password is incorrect
                 $_SESSION['errors'] = ["Wrong password."];  // This is what login.php will print
-                header('Location: login.php');
+                header('Location: ./actions/login.php');
                 mysqli_close($conn);
                 exit();
             } else {  // If password is correct
@@ -71,7 +71,7 @@
 
         } else {  // Username isn't found in the database
             $_SESSION['errors'] = ["Username doesn't exist."];
-            header('Location: login.php');
+            header('Location: ./actions/login.php');
             mysqli_close($conn);
             exit();
         }

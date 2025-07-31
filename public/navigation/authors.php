@@ -28,7 +28,7 @@
     <div class="container my-5">
         <h2>Authors</h2>
         
-        <form method="POST" action="../actions/create.php">
+        <form method="POST" action="../actions/create.php?authorTable">
             <button type="submit" name="newItem" value="authorNewItem" class="btn btn-success">+ New Item</button>
         </form>
 

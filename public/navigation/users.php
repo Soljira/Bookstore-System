@@ -28,7 +28,7 @@
     <div class="container my-5">
         <h2>Users</h2>
         <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        <form method="POST" action="../actions/create.php">
+        <form method="POST" action="../actions/create.php?users">
             <button type="submit" name="newItem" value="userNewItem" class="btn btn-success">+ New Item</button>
         </form>              
         
