@@ -1,6 +1,8 @@
 <?php
 require_once("../php-scripts/start-session.php");
 
+// TUTORIAL USED: https://www.youtube.com/watch?v=NqP0-UkIQS4
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $table = $_SESSION['selectedTable'];
 
