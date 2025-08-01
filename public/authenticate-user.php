@@ -30,7 +30,7 @@
                                     "password", 
                                     FILTER_SANITIZE_SPECIAL_CHARS);
         } else {
-            $_SESSION['errors'] = ["Username and/or password are required."];
+            $_SESSION['errors'] = ["Username and/or password are required"];
             header('Location: ./actions/login.php');
             exit();
         }
@@ -51,7 +51,7 @@
                 Verifies if the user's password is correct. If not, go back to login.php
             */
             if (!(password_verify($password, $row['password']))) {  // If password is incorrect
-                $_SESSION['errors'] = ["Wrong password."];  // This is what login.php will print
+                $_SESSION['errors'] = ["Wrong password"];  // This is what login.php will print
                 header('Location: ./actions/login.php');
                 mysqli_close($conn);
                 exit();
@@ -70,7 +70,7 @@
             }
 
         } else {  // Username isn't found in the database
-            $_SESSION['errors'] = ["Username doesn't exist."];
+            $_SESSION['errors'] = ["Username doesn't exist"];
             header('Location: ./actions/login.php');
             mysqli_close($conn);
             exit();
