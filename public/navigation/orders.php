@@ -14,6 +14,7 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
     <!-- 
@@ -26,34 +27,45 @@
     
     <?php
         include("../partials/header.html");
-        include("../partials/sidebar-navigation.html");
     ?>
 
-    <div class="container my-5">
-        <h2>Orders</h2>
-        <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        <form method="POST" action="../actions/create.php?orderItemTable">
-            <button type="submit" name="newItem" value="orderNewItem" class="btn btn-success">+ New Item</button>
-        </form>             
-        
-        <!-- 1. Create the table to be filled with data -->
-        <table class="table">
-            <tr>
-                <th>Order ID</th>
-                <th>Book ID</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Actions</th>
-            </tr>
+    <div class="container-fluid">
+        <div class="row">
+            <?php include("../partials/sidebar-navigation.html"); ?>    
 
-            <?php
-                include("../php-scripts/populate-table.php");
-                populateTable("orderItemTable", $conn);
-                $_SESSION['selectedTable'] = "orderItemTable";
-                mysqli_close($conn);
-            ?>
-        </table>
-    </div>
+            <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>Orders</h1>
+                    <form method="POST" action="../actions/create.php?orderItemTable">
+                        <button type="submit" name="newItem" value="orderNewItem" class="btn btn-success">+ New Item</button>
+                    </form>                 
+                </div>
+                
+                <!-- 1. Create the table to be filled with data -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Book ID</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include("../php-scripts/populate-table.php");
+                                populateTable("orderItemTable", $conn);
+                                $_SESSION['selectedTable'] = "orderItemTable";
+                                mysqli_close($conn);
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>        
 
     <?php
         include("../partials/footer.html");

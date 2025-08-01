@@ -13,6 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous" defer></script>
     
     <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
     <!-- 
@@ -25,36 +27,45 @@
     
     <?php
         include("../partials/header.html");
-        include("../partials/sidebar-navigation.html");
     ?>
 
-    <div class="container my-5">
-        <h2>Authors</h2>
-        
-        <form method="POST" action="../actions/create.php?authorTable">
-            <button type="submit" name="newItem" value="authorNewItem" class="btn btn-success">+ New Item</button>
-        </form>
 
-        <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        
-        <!-- 1. Create the table to be filled with data -->
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
+    <div class="container-fluid">
+        <div class="row">
+            <?php include("../partials/sidebar-navigation.html"); ?>    
 
-            <?php
-                include("../php-scripts/populate-table.php");
-                populateTable("authorTable", $conn);
-                $_SESSION['selectedTable'] = "authorTable";  // This is for referencing the actual table name in insert-data.php
-                mysqli_close($conn);
-            ?>
-        </table>
+            <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>Authors</h1>
+
+                    <form method="POST" action="../actions/create.php?authorTable">
+                        <button type="submit" name="newItem" value="authorNewItem" class="btn btn-success">+ New Item</button>
+                    </form>                    
+                </div>
+                
+                <!-- 1. Create the table to be filled with data -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include("../php-scripts/populate-table.php");
+                                populateTable("authorTable", $conn);
+                                $_SESSION['selectedTable'] = "authorTable";  // This is for referencing the actual table name in insert-data.php
+                                mysqli_close($conn);
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
     </div>
-
-
 
     <?php
         include("../partials/footer.html");

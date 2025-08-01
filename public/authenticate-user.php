@@ -2,6 +2,7 @@
     session_start();
     $errors=[];
     require_once './api/db-connect.php';
+    // TODO: Move this to php-scripts
 
     /*
         1. Check if the submitted credentials aren't empty. If yes, return to login.php

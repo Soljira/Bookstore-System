@@ -1,5 +1,6 @@
 <?php
     require_once("../php-scripts/start-session.php");
+    // TODO: Move this to the home directory (the same place where index.php is)
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous" defer></script>
 
     <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
     <!-- 
@@ -25,34 +28,47 @@
     
     <?php
         include("../partials/header.html");
-        include("../partials/sidebar-navigation.html");
     ?>
 
-    <div class="container my-5">
-        <h2>Users</h2>
-        <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        <form method="POST" action="../actions/create.php?users">
-            <button type="submit" name="newItem" value="userNewItem" class="btn btn-success">+ New Item</button>
-        </form>              
-        
-        <!-- 1. Create the table to be filled with data -->
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Created At</th>
-                <th>Actions</th>
-            </tr>
 
-            <?php
-                include("../php-scripts/populate-table.php");
-                populateTable("users", $conn);
-                $_SESSION['selectedTable'] = "users";
-                mysqli_close($conn);
-            ?>
-        </table>
-    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <?php include("../partials/sidebar-navigation.html"); ?>    
+
+            <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>Users</h1>
+                    <form method="POST" action="../actions/create.php?users">
+                        <button type="submit" name="newItem" value="userNewItem" class="btn btn-success">+ New Item</button>
+                    </form>                       
+                </div>
+                
+                <!-- 1. Create the table to be filled with data -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include("../php-scripts/populate-table.php");
+                                populateTable("users", $conn);
+                                $_SESSION['selectedTable'] = "users";
+                                mysqli_close($conn);
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>            
 
     <?php
         include("../partials/footer.html");

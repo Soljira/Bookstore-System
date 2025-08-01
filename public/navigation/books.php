@@ -14,6 +14,9 @@
     
     <!-- Feather icons. This will not work without feather.replace() (this is already taken care of in footer.html) -->
     <script src="https://unpkg.com/feather-icons"></script>
+    
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sticky-footer.css">
 </head>
 <body>
     <!-- 
@@ -31,11 +34,12 @@
     <div class="container-fluid">
         <div class="row">
             <?php include("../partials/sidebar-navigation.html"); ?>
-            
 
-            <main class="col-md-10 ms-sm-auto px-md-4">
+            <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h2>Books</h2>
+                    <h1>Books</h1>
+                    <!-- TODO: Export to .cvs button and funcitonality -->
+
                     <form method="POST" action="../actions/create.php?bookTable">
                         <button type="submit" name="newItem" value="bookNewItem" class="btn btn-success">+ New Item</button>
                     </form>
@@ -43,7 +47,7 @@
                 
                 <!-- 1. Create the table to be filled with data -->
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
