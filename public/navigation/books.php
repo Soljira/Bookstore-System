@@ -9,7 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous" defer></script>
+    
+    <!-- Feather icons. This will not work without feather.replace() (this is already taken care of in footer.html) -->
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
     <!-- 
@@ -22,39 +26,51 @@
     
     <?php
         include("../partials/header.html");
-        include("../partials/sidebar-navigation.html");
     ?>
 
-    <div class="container my-5">
-        <h2>Books</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <?php include("../partials/sidebar-navigation.html"); ?>
+            
 
-        <form method="POST" action="../actions/create.php?bookTable">
-            <button type="submit" name="newItem" value="bookNewItem" class="btn btn-success">+ New Item</button>
-        </form>        
-        <!-- <a href="../actions/create.php" class="btn btn-primary" role="button">New Item</a> -->
-        
-        <!-- 1. Create the table to be filled with data -->
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Publisher</th>
-                <th>Publication Date</th>
-                <th>Genre</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-
-            <?php
-                include("../php-scripts/populate-table.php");
-                populateTable("bookTable", $conn);
-                $_SESSION['selectedTable'] = "bookTable";
-                mysqli_close($conn);
-            ?>
-        </table>
+            <main class="col-md-10 ms-sm-auto px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2>Books</h2>
+                    <form method="POST" action="../actions/create.php?bookTable">
+                        <button type="submit" name="newItem" value="bookNewItem" class="btn btn-success">+ New Item</button>
+                    </form>
+                </div>
+                
+                <!-- 1. Create the table to be filled with data -->
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Publisher</th>
+                                <th>Publication Date</th>
+                                <th>Genre</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include("../php-scripts/populate-table.php");
+                                populateTable("bookTable", $conn);
+                                $_SESSION['selectedTable'] = "bookTable";
+                                mysqli_close($conn);
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
     </div>
+    
     <?php
         include("../partials/footer.html");
     ?>
