@@ -46,7 +46,7 @@
                 </label>
             </div> -->
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block mt-1" type="submit" name="login">Sign in</button>
             <p class="mt-5 mb-3 text-muted">&copy; Soljira</p>
         </form>        
     </body>
