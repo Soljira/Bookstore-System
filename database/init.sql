@@ -66,6 +66,13 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (userID)
 );
 
+-- This should correspond to 'password'
+INSERT INTO users (username, password)
+VALUES (
+  'root',
+  '$2y$12$EChoBwWZuEZoyfti0k7nNu9CuA1vHk2F.XcTKCgzdqarR5JAoT8da'
+);
+
 -- Insert Authors
 INSERT IGNORE INTO authorTable (authorName) VALUES
 ('Jane Austen'),

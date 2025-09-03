@@ -40,6 +40,8 @@ First time using Docker hehe
 
 5. **Access the application**
    - **Website**: http://localhost:8080
+      - Username: root
+      - Password: password
    - **Adminer (Database Admin; phpmyadmin alternative)**: http://localhost:8081
      - Server: `mysql`
      - Username: `root`
